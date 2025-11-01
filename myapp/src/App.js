@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
-import { FaHome, FaPause, FaPlay, FaBars } from "react-icons/fa";
+import { FaHome, FaPause, FaPlay, FaBars, FaHeart } from "react-icons/fa";
 import { BiLibrary } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 
@@ -11,14 +11,9 @@ export default function SpotifyClone() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [showSidebar, setShowSidebar] = useState(false);
   const [progress, setProgress] = useState(0);
-
   const audioRef = useRef(null);
 
-<<<<<<< HEAD
-  //  Load songs from public/songs.json
-=======
   // Load songs from public/songs.json
->>>>>>> 0559a4b (updated files)
   useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/songs.json")
       .then((res) => res.json())
@@ -26,34 +21,21 @@ export default function SpotifyClone() {
       .catch((err) => console.error("Error loading songs:", err));
   }, []);
 
-<<<<<<< HEAD
-  //  Load saved library
-=======
   // Load saved library
->>>>>>> 0559a4b (updated files)
   useEffect(() => {
     const savedLibrary = localStorage.getItem("library");
     if (savedLibrary) setLibrary(JSON.parse(savedLibrary));
   }, []);
 
-<<<<<<< HEAD
-  //  Save library changes
-=======
   // Save library changes
->>>>>>> 0559a4b (updated files)
   useEffect(() => {
     localStorage.setItem("library", JSON.stringify(library));
   }, [library]);
 
-<<<<<<< HEAD
-  //  Sidebar toggle
+  // Sidebar toggle
   const toggleSidebar = () => setShowSidebar(!showSidebar);
 
-  //  Play song
-=======
-  const toggleSidebar = () => setShowSidebar(!showSidebar);
-
->>>>>>> 0559a4b (updated files)
+  // Play a song
   const playSong = (song) => {
     const src = process.env.PUBLIC_URL + `/songs/${song.file}`;
     setCurrentSong({ ...song, src });
@@ -66,10 +48,7 @@ export default function SpotifyClone() {
     }, 300);
   };
 
-<<<<<<< HEAD
-  //  Play / Pause
-=======
->>>>>>> 0559a4b (updated files)
+  // Play / Pause toggle
   const togglePlay = () => {
     if (!currentSong || !audioRef.current) return;
     if (isPlaying) audioRef.current.pause();
@@ -77,9 +56,7 @@ export default function SpotifyClone() {
     setIsPlaying(!isPlaying);
   };
 
-<<<<<<< HEAD
-  //  Progress bar update
-=======
+  // Previous / Next
   const playPrevious = () => {
     if (!currentSong) return;
     const currentList = viewLibrary ? library : songs;
@@ -96,7 +73,7 @@ export default function SpotifyClone() {
     else playSong(currentList[0]);
   };
 
->>>>>>> 0559a4b (updated files)
+  // Progress bar
   const handleTimeUpdate = () => {
     if (audioRef.current && audioRef.current.duration) {
       const percent =
@@ -105,10 +82,6 @@ export default function SpotifyClone() {
     }
   };
 
-<<<<<<< HEAD
-  //  Seek control
-=======
->>>>>>> 0559a4b (updated files)
   const handleSeek = (e) => {
     if (!audioRef.current) return;
     const value = e.target.value;
@@ -117,10 +90,7 @@ export default function SpotifyClone() {
     setProgress(value);
   };
 
-<<<<<<< HEAD
-  // Add/remove from library
-=======
->>>>>>> 0559a4b (updated files)
+  // Add / remove from library
   const toggleLibrary = (song) => {
     const exists = library.find((s) => s.file === song.file);
     if (exists) setLibrary(library.filter((s) => s.file !== song.file));
@@ -130,70 +100,10 @@ export default function SpotifyClone() {
   const displayedSongs = viewLibrary ? library : songs;
 
   return (
-<<<<<<< HEAD
-    <div className="flex h-screen bg-[#121212] text-white overflow-hidden">
-      {/* SIDEBAR */}
-      <div
-        className={`fixed md:static top-0 left-0 h-full w-64 bg-black flex flex-col justify-between p-4 transform transition-transform duration-300 z-30 ${
-          showSidebar ? "translate-x-0" : "-translate-x-full md:translate-x-0"
-        }`}
-      >
-        <div>
-          <div className="flex items-center space-x-3 mb-6">
-            <img
-              className="w-10 h-10"
-              src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
-              alt="Spotify Logo"
-            />
-            <h1 className="text-2xl font-bold">Music App</h1>
-          </div>
-
-          <ul className="space-y-4">
-            <li
-              onClick={() => {
-                setViewLibrary(false);
-                setShowSidebar(false);
-              }}
-              className={`flex items-center space-x-3 cursor-pointer ${
-                !viewLibrary ? "text-white" : "text-gray-300 hover:text-white"
-              }`}
-            >
-              <span>🏠</span>
-              <span>Home</span>
-            </li>
-
-            <li
-              onClick={() => {
-                setViewLibrary(true);
-                setShowSidebar(false);
-              }}
-              className={`flex items-center space-x-3 cursor-pointer ${
-                viewLibrary ? "text-white" : "text-gray-300 hover:text-white"
-              }`}
-            >
-              <span>❤️</span>
-              <span>Your Library</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="text-xs text-gray-500 space-y-1 mt-6">
-          <p>Legal</p>
-          <p>Privacy Center</p>
-          <p>Cookies</p>
-          <p>About Us</p>
-          <p>Accessibility</p>
-        </div>
-      </div>
-
-      {/*  Overlay for mobile */}
-      {showSidebar && (
-=======
     <div className="flex flex-col h-screen bg-[#121212] text-white overflow-hidden">
       {/* SIDEBAR + MAIN */}
       <div className="flex flex-1 overflow-hidden">
         {/* Sidebar */}
->>>>>>> 0559a4b (updated files)
         <div
           className={`fixed md:static top-0 left-0 h-full w-64 bg-black flex flex-col justify-between p-4 transform transition-transform duration-300 z-30 ${
             showSidebar ? "translate-x-0" : "-translate-x-full md:translate-x-0"
@@ -209,31 +119,6 @@ export default function SpotifyClone() {
               <h1 className="text-2xl font-bold">Music App</h1>
             </div>
 
-<<<<<<< HEAD
-      {/*  MAIN CONTENT */}
-      <div className="flex-1 flex flex-col">
-        <div className="flex justify-between items-center p-4 bg-[#181818] sticky top-0 z-10">
-          <button
-            onClick={toggleSidebar}
-            className="md:hidden flex flex-col justify-between w-8 h-6 focus:outline-none group"
-          >
-            <span
-              className={`block h-1 bg-white rounded transition-all duration-300 ${
-                showSidebar ? "rotate-45 translate-y-2.5" : ""
-              }`}
-            ></span>
-            <span
-              className={`block h-1 bg-white rounded transition-all duration-300 ${
-                showSidebar ? "opacity-0" : ""
-              }`}
-            ></span>
-            <span
-              className={`block h-1 bg-white rounded transition-all duration-300 ${
-                showSidebar ? "-rotate-45 -translate-y-2.5" : ""
-              }`}
-            ></span>
-          </button>
-=======
             <ul className="space-y-4">
               <li
                 onClick={() => {
@@ -246,10 +131,9 @@ export default function SpotifyClone() {
                     : "text-gray-300 hover:text-white"
                 }`}
               >
-                <FaHome size={24} />
+                <FaHome size={20} />
                 <span>Home</span>
               </li>
->>>>>>> 0559a4b (updated files)
 
               <li
                 onClick={() => {
@@ -262,7 +146,7 @@ export default function SpotifyClone() {
                     : "text-gray-300 hover:text-white"
                 }`}
               >
-                <BiLibrary size={24} />
+                <FaHeart size={20} />
                 <span>Your Library</span>
               </li>
             </ul>
@@ -440,3 +324,4 @@ export default function SpotifyClone() {
     </div>
   );
 }
+
