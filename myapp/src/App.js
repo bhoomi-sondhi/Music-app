@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { FaHome, FaPause, FaPlay, FaBars, FaHeart } from "react-icons/fa";
-import { BiLibrary } from "react-icons/bi";
+
 import { AiOutlineClose } from "react-icons/ai";
 
 export default function SpotifyClone() {
