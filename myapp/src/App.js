@@ -11,7 +11,7 @@ export default function SpotifyClone() {
 
   const audioRef = useRef(null);
 
-  // ✅ Load songs from public/songs.json
+  //  Load songs from public/songs.json
   useEffect(() => {
     fetch(process.env.PUBLIC_URL + "/songs.json")
       .then((res) => res.json())
@@ -19,21 +19,21 @@ export default function SpotifyClone() {
       .catch((err) => console.error("Error loading songs:", err));
   }, []);
 
-  // 💾 Load saved library
+  //  Load saved library
   useEffect(() => {
     const savedLibrary = localStorage.getItem("library");
     if (savedLibrary) setLibrary(JSON.parse(savedLibrary));
   }, []);
 
-  // 💽 Save library changes
+  //  Save library changes
   useEffect(() => {
     localStorage.setItem("library", JSON.stringify(library));
   }, [library]);
 
-  // 🍔 Sidebar toggle
+  //  Sidebar toggle
   const toggleSidebar = () => setShowSidebar(!showSidebar);
 
-  // ▶️ Play song
+  //  Play song
   const playSong = (song) => {
     const src = process.env.PUBLIC_URL + `/songs/${song.file}`;
     setCurrentSong({ ...song, src });
@@ -47,7 +47,7 @@ export default function SpotifyClone() {
     }, 300);
   };
 
-  // ⏯ Play / Pause
+  //  Play / Pause
   const togglePlay = () => {
     if (!currentSong || !audioRef.current) return;
 
@@ -59,7 +59,7 @@ export default function SpotifyClone() {
     setIsPlaying(!isPlaying);
   };
 
-  // 📊 Progress bar update
+  //  Progress bar update
   const handleTimeUpdate = () => {
     if (audioRef.current && audioRef.current.duration) {
       const percent =
@@ -68,7 +68,7 @@ export default function SpotifyClone() {
     }
   };
 
-  // ⏩ Seek control
+  //  Seek control
   const handleSeek = (e) => {
     if (!audioRef.current) return;
     const value = e.target.value;
@@ -77,7 +77,7 @@ export default function SpotifyClone() {
     setProgress(value);
   };
 
-  // ❤️ Add/remove from library
+  // Add/remove from library
   const toggleLibrary = (song) => {
     const exists = library.find((s) => s.file === song.file);
     if (exists) {
@@ -91,7 +91,7 @@ export default function SpotifyClone() {
 
   return (
     <div className="flex h-screen bg-[#121212] text-white overflow-hidden">
-      {/* 🟩 SIDEBAR */}
+      {/* SIDEBAR */}
       <div
         className={`fixed md:static top-0 left-0 h-full w-64 bg-black flex flex-col justify-between p-4 transform transition-transform duration-300 z-30 ${
           showSidebar ? "translate-x-0" : "-translate-x-full md:translate-x-0"
@@ -104,7 +104,7 @@ export default function SpotifyClone() {
               src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
               alt="Spotify Logo"
             />
-            <h1 className="text-2xl font-bold">Spotify</h1>
+            <h1 className="text-2xl font-bold">Music App</h1>
           </div>
 
           <ul className="space-y-4">
@@ -145,7 +145,7 @@ export default function SpotifyClone() {
         </div>
       </div>
 
-      {/* 🟠 Overlay for mobile */}
+      {/*  Overlay for mobile */}
       {showSidebar && (
         <div
           onClick={toggleSidebar}
@@ -153,7 +153,7 @@ export default function SpotifyClone() {
         ></div>
       )}
 
-      {/* 🟣 MAIN CONTENT */}
+      {/*  MAIN CONTENT */}
       <div className="flex-1 flex flex-col">
         <div className="flex justify-between items-center p-4 bg-[#181818] sticky top-0 z-10">
           <button
